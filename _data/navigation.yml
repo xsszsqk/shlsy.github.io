@@ -1,17 +1,16 @@
 # Site navigation links
 - title: 首页
-  url: //tanfujun.cc/
+  url: //sqk.pub/
 
 - title: 文章轨迹
   url: /posts/
 
-- title: Android学习
+- title: Android故事
   url: /theme-android/
 
-- title: iOS学习
-  url: /theme-ios/
 
-- title: 互联网Tips
+
+- title: 心情驿站
   url: /theme-network/
 
 
