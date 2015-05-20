@@ -1,6 +1,6 @@
 # Site wide configuration
 
-title:            晓_晨DEV的博客
+title:            史琪锴的博客
 locale:           zh_CN
 url:              
 
@@ -26,11 +26,11 @@ kramdown:
 
 # Site owner
 owner:
-  name: 晓_晨DEV
+  name: 史琪锴
   avatar: bio-photo.jpg
-  bio: "Android开发者，iOS学习中，各种技术粉.公众号xiaochenAndroid欢迎关注"
-  email: cctanfujun@163.com
-  disqus-shortname: xiaochendev  #这里是多说shortname
+  bio: "Android热爱者，大爱Teambition"
+  email: zjnusqk@aliyun.com
+  disqus-shortname: sqk  #这里是多说shortname
   twitter: #username
   facebook: #username
   google:
@@ -40,7 +40,7 @@ owner:
     ad-client: 
     ad-slot: 
   bing-verify: 
-  github: cctanfujun
+  github: shlsy
   stackoverflow: #http://stackoverflow.com/users/123456/username
   linkedin: #username
   xing: #username
@@ -53,7 +53,7 @@ owner:
   dribbble: #username
   youtube: #username
   soundcloud: #username
-  weibo: xiaochendev
+  weibo: 史琪锴
   flickr: #username
 
 include: [".htaccess"]
