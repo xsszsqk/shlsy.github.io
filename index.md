@@ -1,7 +1,7 @@
----
+﻿---
 layout: home
-excerpt: "晓_晨DEV博客首页"
-tags: [晓_晨DEV, Android, iOS, blog]
+excerpt: "史琪锴的博客首页"
+tags: [Teambition, Android, blog]
 image:
   feature: sample-image-5.jpg
   
