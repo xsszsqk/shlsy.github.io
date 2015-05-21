@@ -4,13 +4,247 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-05-21T11:44:31+08:00</updated>
+<updated>2015-05-21T14:10:56+08:00</updated>
 <id>/</id>
 <author>
   <name>史琪锴</name>
   <uri>/</uri>
   <email>zjnusqk@aliyun.com</email>
 </author>
+
+
+  
+
+<entry>
+  <title type="html"><![CDATA[Android逆向新手小案例]]></title>
+  <link rel="alternate" type="text/html" href="/Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/" />
+  <id>/Android逆向实例</id>
+  <updated>2015-5-21T00:00:00-00:00</updated>
+  <published>2015-05-21T00:00:00+08:00</published>
+  
+  <author>
+    <name>史琪锴</name>
+    <uri></uri>
+    <email>zjnusqk@aliyun.com</email>
+  </author>
+  <content type="html">
+    &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
+  &lt;header&gt;
+    &lt;h3&gt;&lt;i class=&quot;fa fa-book&quot;&gt;&lt;/i&gt; Overview&lt;/h3&gt;
+  &lt;/header&gt;
+&lt;div id=&quot;drawer&quot;&gt;
+&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#section&quot; id=&quot;markdown-toc-section&quot;&gt;二.步骤：&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;/div&gt;
+&lt;/section&gt;
+&lt;!-- /#table-of-contents --&gt;
+&lt;p&gt;#流程
+##一.&lt;a href=&quot;http://download.csdn.net/detail/xsszsqk/8722759&quot;&gt;应用程序源码&lt;/a&gt;
+可以用Android Studio或者Eclipse。
+关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：
+&lt;code&gt;private boolean checkSN(String userName, String sn) {
+        try {
+            if ((userName == null) || (userName.length() == 0))
+                return false;
+            if ((sn == null) || (sn.length() != 16))
+                return false;
+            MessageDigest digest = MessageDigest.getInstance(&quot;MD5&quot;);
+            digest.reset();
+            digest.update(userName.getBytes());
+            byte[] bytes = digest.digest();     //采用MD5对用户名进行Hash
+            String hexstr = toHexString(bytes, &quot;&quot;); //将计算结果转化成字符串
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i &amp;lt; hexstr.length(); i += 2) {
+                sb.append(hexstr.charAt(i));
+            }
+            String userSN = sb.toString(); //计算出的SN        
+            //Log.d(&quot;crackme&quot;, hexstr);
+            //Log.d(&quot;crackme&quot;, userSN);
+            if (!userSN.equalsIgnoreCase(sn))   //比较注册码是否正确
+                return false;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return false;
+        }        
+        return true;
+    }&lt;/code&gt;
+这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
+  接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：
+    `btn_register = (Button) findViewById(R.id.button_register);
+        btn_register.setOnClickListener(new OnClickListener() {&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;        public void onClick(View v) {
+            if (!checkSN(edit_userName.getText().toString().trim(), 
+                    edit_sn.getText().toString().trim())) {
+                Toast.makeText(MainActivity.this,       //弹出无效用户名或注册码提示
+                        R.string.unsuccessed, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this,       //弹出注册成功提示
+                        R.string.successed, Toast.LENGTH_SHORT).show();
+                btn_register.setEnabled(false);
+                setTitle(R.string.registered);  //模拟程序已注册
+            }                
+        }
+    });`    接下来进行编译，运行(集成工具已经帮我们做好了一切)。 运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：  思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们将使用APKIDE。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;二.步骤：&lt;/h2&gt;
+&lt;p&gt;还记得刚刚的错误提示&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;“无效的用户名或注册码”&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;，就从这里入手。
+1.反编译APK
+&lt;img src=&quot;/images/back2.jpg&quot; alt=&quot;1&quot; /&gt;
+2.成功后的目录结构如下：
+&lt;img src=&quot;/images/back3.jpg&quot; alt=&quot;2&quot; /&gt;
+其中smali目录下存放了程序所有的反汇编代码，res目录则是程序中所有的资源文件，这些目录的子目录与开发时的源码目录组织结构是一致的。
+错误提示是Android程序中的字符串资源，开发Android程序时，这些字符串可能硬编码到源码中，也可能引用自“res-values”目录下的strings.xml文件，
+apk文件在打包时，strings.xml中的字符串被加密存储为resources.arsc文件保存到APK程序包中，apk被成功反编译之后这个文件也被解密出来了。
+我们打开反编译后的&lt;img src=&quot;/images/back4.jpg&quot; alt=&quot;3&quot; /&gt;文件，内容如下：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;/p&gt;
+&lt;resources&gt;
+    &lt;string name=&quot;app_name&quot;&gt;Crackme0201&lt;/string&gt;
+    &lt;string name=&quot;menu_settings&quot;&gt;Settings&lt;/string&gt;
+    &lt;string name=&quot;title_activity_main&quot;&gt;Crackme0201&lt;/string&gt;
+    &lt;string name=&quot;info&quot;&gt;Android程序破解演示实例&lt;/string&gt;
+    &lt;string name=&quot;username&quot;&gt;用户名：&lt;/string&gt;
+    &lt;string name=&quot;sn&quot;&gt;注册码：&lt;/string&gt;
+    &lt;string name=&quot;register&quot;&gt;注 册&lt;/string&gt;
+    &lt;string name=&quot;hint_username&quot;&gt;请输入用户名&lt;/string&gt;
+    &lt;string name=&quot;hint_sn&quot;&gt;请输入16位的注册码&lt;/string&gt;
+    &lt;string name=&quot;unregister&quot;&gt;程序未注册&lt;/string&gt;
+    &lt;string name=&quot;registered&quot;&gt;程序已注册&lt;/string&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;string name=&amp;quot;unsuccessed&amp;quot;&amp;gt;无效用户名或注册码&amp;lt;/string&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;string name=&quot;successed&quot;&gt;恭喜您！注册成功&lt;/string&gt;
+&lt;/resources&gt;
+
+&lt;p&gt;我们找到关键字“unsuccessed”，每个字符串都有一个唯一的int类型索引值，在R文件中，反编译之后，所有的索引值保存在了public.xml文件中，打开查看：
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;&lt;/p&gt;
+&lt;resources&gt;
+    &lt;public type=&quot;drawable&quot; name=&quot;ic_launcher&quot; id=&quot;0x7f020001&quot; /&gt;
+    &lt;public type=&quot;drawable&quot; name=&quot;ic_action_search&quot; id=&quot;0x7f020000&quot; /&gt;
+    &lt;public type=&quot;layout&quot; name=&quot;activity_main&quot; id=&quot;0x7f030000&quot; /&gt;
+    &lt;public type=&quot;dimen&quot; name=&quot;padding_small&quot; id=&quot;0x7f040000&quot; /&gt;
+    &lt;public type=&quot;dimen&quot; name=&quot;padding_medium&quot; id=&quot;0x7f040001&quot; /&gt;
+    &lt;public type=&quot;dimen&quot; name=&quot;padding_large&quot; id=&quot;0x7f040002&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;app_name&quot; id=&quot;0x7f050000&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;menu_settings&quot; id=&quot;0x7f050001&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;title_activity_main&quot; id=&quot;0x7f050002&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;info&quot; id=&quot;0x7f050003&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;username&quot; id=&quot;0x7f050004&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;sn&quot; id=&quot;0x7f050005&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;register&quot; id=&quot;0x7f050006&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;hint_username&quot; id=&quot;0x7f050007&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;hint_sn&quot; id=&quot;0x7f050008&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;unregister&quot; id=&quot;0x7f050009&quot; /&gt;
+    &lt;public type=&quot;string&quot; name=&quot;registered&quot; id=&quot;0x7f05000a&quot; /&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;public type=&amp;quot;string&amp;quot; name=&amp;quot;unsuccessed&amp;quot; id=&amp;quot;0x7f05000b&amp;quot; /&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+    &lt;public type=&quot;string&quot; name=&quot;successed&quot; id=&quot;0x7f05000c&quot; /&gt;
+    &lt;public type=&quot;style&quot; name=&quot;AppTheme&quot; id=&quot;0x7f060000&quot; /&gt;
+    &lt;public type=&quot;menu&quot; name=&quot;activity_main&quot; id=&quot;0x7f070000&quot; /&gt;
+    &lt;public type=&quot;id&quot; name=&quot;textView1&quot; id=&quot;0x7f080000&quot; /&gt;
+    &lt;public type=&quot;id&quot; name=&quot;edit_username&quot; id=&quot;0x7f080001&quot; /&gt;
+    &lt;public type=&quot;id&quot; name=&quot;edit_sn&quot; id=&quot;0x7f080002&quot; /&gt;
+    &lt;public type=&quot;id&quot; name=&quot;button_register&quot; id=&quot;0x7f080003&quot; /&gt;
+    &lt;public type=&quot;id&quot; name=&quot;menu_settings&quot; id=&quot;0x7f080004&quot; /&gt;
+&lt;/resources&gt;
+&lt;p&gt;Unsuccessed的id的值为0x7f05000b，&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;.line 32
+    #calls: Lcom/droider/crackme0201/MainActivity;-&amp;gt;checkSN(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&amp;gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)Z&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;move-result v0       
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;.line 33
+if-nez v0, :cond_0     
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;.line 34
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&amp;gt;this$0:Lcom/droider/crackme0201/MainActivity;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#这个是对MainActivity实例的引用，代码中的“-&amp;gt;this$0”存储 的是MainActivity的引用&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;.line 35
+const v1, 0x7f05000b   
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#发现没有？这是unsuccessed字符串！。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#他在这里干了什么？是将V1寄存器传入unsuccessed字符串的id值！&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;.line 34
+invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&amp;gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;# Toast;-&amp;gt;makeText。 这个在Android里是调用提示框的代码，也就是说提示用户“无效的用户名或注册码”。  这样流程就很清楚了。 那注册成功会怎么样呢？我们接着分析。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;:cond_0&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#这里就是上面说到的cond_0，如果跳转到了这里，这段代码的的功能是弹出注册成功提示，也就是说，上面的跳转如果成功意味着程序会成功注册。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&amp;gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+.line 38
+const v1, 0x7f05000c    
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#发现没有？这是successed字符串！。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;pre&gt;&lt;code&gt;.line 37
+invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&amp;gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+
+move-result-object v0
+
+.line 38
+invoke-virtual {v0}, Landroid/widget/Toast;-&amp;gt;show()V
+
+.line 39
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&amp;gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+#getter for: Lcom/droider/crackme0201/MainActivity;-&amp;gt;btn_register:Landroid/widget/Button;
+invoke-static {v0}, Lcom/droider/crackme0201/MainActivity;-&amp;gt;access$3(Lcom/droider/crackme0201/MainActivity;)Landroid/widget/Button;
+
+move-result-object v0
+
+invoke-virtual {v0, v3}, Landroid/widget/Button;-&amp;gt;setEnabled(Z)V
+
+.line 40
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&amp;gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+const v1, 0x7f05000a
+
+invoke-virtual {v0, v1}, Lcom/droider/crackme0201/MainActivity;-&amp;gt;setTitle(I)V
+
+goto :goto_0 .end method
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;!--end ------------------------------------------------------华丽丽的分割线--!&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;分析：if-nez v0, :cond_0 是程序破解的关键。
+If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等
+其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。
+用任意一款文本编辑器打开（或者直接在ApkIDE里修改）将&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;if-nez v0, :cond_0改成if-eqz v0, :cond_0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;保存后，就算修改完成了。
+最后，进行编译、签名，重新安装APK。看看效果吧！&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/back5.gif&quot; alt=&quot;逆向后运行图&quot; /&gt;&lt;/p&gt;
+
+    &lt;p&gt;&lt;a href=&quot;/Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/&quot;&gt;Android逆向新手小案例&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on May 21, 2015.&lt;/p&gt;
+  </content>
+</entry>
 
 
   

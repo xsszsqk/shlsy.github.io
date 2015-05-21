@@ -1,0 +1,446 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Android逆向新手小案例 &#8211; 史琪锴的博客</title>
+<meta property="wb:webmaster" content="c54d7cd9867e7171" />
+<meta name="description" content="自己做过的，适用于刚入门的小菜鸟，大神勿喷">
+<meta name="keywords" content="Android">
+
+
+
+<!-- Twitter Cards -->
+<meta name="twitter:title" content="Android逆向新手小案例">
+<meta name="twitter:description" content="自己做过的，适用于刚入门的小菜鸟，大神勿喷">
+
+
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="/images/default-thumb.png">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="zh_CN">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android逆向新手小案例">
+<meta property="og:description" content="自己做过的，适用于刚入门的小菜鸟，大神勿喷">
+<meta property="og:url" content="/Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/">
+<meta property="og:site_name" content="史琪锴的博客">
+
+
+
+
+
+<link rel="canonical" href="/Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/">
+<link href="/feed.xml" type="application/atom+xml" rel="alternate" title="史琪锴的博客 Feed">
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="/assets/css/main.css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- HTML5 Shiv and Media Query Support -->
+<!--[if lt IE 9]>
+	<script src="/assets/js/vendor/html5shiv.min.js"></script>
+	<script src="/assets/js/vendor/respond.min.js"></script>
+<![endif]-->
+
+<!-- Modernizr -->
+<script src="/assets/js/vendor/modernizr-2.7.1.custom.min.js"></script>
+<!--加入微博评论js-->
+<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+
+<link href='//fonts.googleapis.com/css?family=PT+Sans+Narrow:400,700%7CPT+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="/images/apple-touch-icon-144x144-precomposed.png">
+
+</head>
+
+<body class="post">
+
+<!--[if lt IE 9]><div class="browser-upgrade alert alert-info">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</div><![endif]-->
+
+<div class="navigation-wrapper">
+	<div class="site-name">
+		<a href="/">史琪锴的博客</a>
+	</div><!-- /.site-name -->
+	<div class="top-navigation">
+		<nav role="navigation" id="site-nav" class="nav">
+		    <ul>
+		        
+				    
+				        
+				    
+				    <li><a href="//sqk.pub/" >首页</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/posts/" >文章轨迹</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/theme-android/" >Android故事</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/theme-network/" >心情驿站</a></li>
+				
+				    
+				        
+				    
+				    <li><a href="/about/" >关于我</a></li>
+				
+		    </ul>
+		</nav>
+	</div><!-- /.top-navigation -->
+</div><!-- /.navigation-wrapper -->
+
+
+
+<div id="main" role="main">
+  <div class="article-author-side">
+    
+
+
+<div itemscope itemtype="http://schema.org/Person">
+
+
+	<img src="/images/bio-photo.jpg" class="bio-photo" alt="史琪锴 bio photo">
+
+
+  <h3 itemprop="name">史琪锴</h3>
+  <p>Android热爱者，大爱Teambition</p>
+  <a href="mailto:zjnusqk@aliyun.com" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a>
+  
+  
+  
+  
+  
+  
+  
+  <a href="http://github.com/shlsy" class="author-social" target="_blank"><i class="fa fa-fw fa-github"></i> Github</a>
+  
+  
+  
+  
+  
+  
+  
+  
+  <a href="http://www.weibo.com/2956611417" class="author-social" target="_blank"><i class="fa fa-fw fa-weibo"></i> Weibo</a>
+  
+  <a href="/feed.xml" class="author-social" target="_blank"><i class="fa fa-fw fa-rss"></i> RSS</a>
+</div>
+
+  </div>
+  <article class="post">
+    <div class="headline-wrap">
+      
+        <h1><a href="/Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/" rel="bookmark" title="Android逆向新手小案例">Android逆向新手小案例</a></h1>
+      
+    </div><!--/ .headline-wrap -->
+    <div class="article-wrap">
+      <section id="table-of-contents" class="toc">
+  <header>
+    <h3><i class="fa fa-book"></i> Overview</h3>
+  </header>
+<div id="drawer">
+<ul id="markdown-toc">
+  <li><a href="#section" id="markdown-toc-section">二.步骤：</a></li>
+</ul>
+
+  </div>
+</section>
+<!-- /#table-of-contents -->
+<p>#流程
+##一.<a href="http://download.csdn.net/detail/xsszsqk/8722759">应用程序源码</a>
+可以用Android Studio或者Eclipse。
+关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：
+<code>private boolean checkSN(String userName, String sn) {
+        try {
+            if ((userName == null) || (userName.length() == 0))
+                return false;
+            if ((sn == null) || (sn.length() != 16))
+                return false;
+            MessageDigest digest = MessageDigest.getInstance("MD5");
+            digest.reset();
+            digest.update(userName.getBytes());
+            byte[] bytes = digest.digest();     //采用MD5对用户名进行Hash
+            String hexstr = toHexString(bytes, ""); //将计算结果转化成字符串
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i &lt; hexstr.length(); i += 2) {
+                sb.append(hexstr.charAt(i));
+            }
+            String userSN = sb.toString(); //计算出的SN        
+            //Log.d("crackme", hexstr);
+            //Log.d("crackme", userSN);
+            if (!userSN.equalsIgnoreCase(sn))   //比较注册码是否正确
+                return false;
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return false;
+        }        
+        return true;
+    }</code>
+这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
+  接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：
+    `btn_register = (Button) findViewById(R.id.button_register);
+        btn_register.setOnClickListener(new OnClickListener() {</p>
+
+<pre><code>        public void onClick(View v) {
+            if (!checkSN(edit_userName.getText().toString().trim(), 
+                    edit_sn.getText().toString().trim())) {
+                Toast.makeText(MainActivity.this,       //弹出无效用户名或注册码提示
+                        R.string.unsuccessed, Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(MainActivity.this,       //弹出注册成功提示
+                        R.string.successed, Toast.LENGTH_SHORT).show();
+                btn_register.setEnabled(false);
+                setTitle(R.string.registered);  //模拟程序已注册
+            }                
+        }
+    });`    接下来进行编译，运行(集成工具已经帮我们做好了一切)。 运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：  思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
+</code></pre>
+
+<p>我们将使用APKIDE。</p>
+
+<h2 id="section">二.步骤：</h2>
+<p>还记得刚刚的错误提示</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">“无效的用户名或注册码”</code></pre></div>
+<p>，就从这里入手。
+1.反编译APK
+<img src="/images/back2.jpg" alt="1" />
+2.成功后的目录结构如下：
+<img src="/images/back3.jpg" alt="2" />
+其中smali目录下存放了程序所有的反汇编代码，res目录则是程序中所有的资源文件，这些目录的子目录与开发时的源码目录组织结构是一致的。
+错误提示是Android程序中的字符串资源，开发Android程序时，这些字符串可能硬编码到源码中，也可能引用自“res-values”目录下的strings.xml文件，
+apk文件在打包时，strings.xml中的字符串被加密存储为resources.arsc文件保存到APK程序包中，apk被成功反编译之后这个文件也被解密出来了。
+我们打开反编译后的<img src="/images/back4.jpg" alt="3" />文件，内容如下：
+<?xml version="1.0" encoding="utf-8"?></p>
+<resources>
+    <string name="app_name">Crackme0201</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_main">Crackme0201</string>
+    <string name="info">Android程序破解演示实例</string>
+    <string name="username">用户名：</string>
+    <string name="sn">注册码：</string>
+    <string name="register">注 册</string>
+    <string name="hint_username">请输入用户名</string>
+    <string name="hint_sn">请输入16位的注册码</string>
+    <string name="unregister">程序未注册</string>
+    <string name="registered">程序已注册</string>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;string name=&quot;unsuccessed&quot;&gt;无效用户名或注册码&lt;/string&gt;</code></pre></div>
+
+    <string name="successed">恭喜您！注册成功</string>
+</resources>
+
+<p>我们找到关键字“unsuccessed”，每个字符串都有一个唯一的int类型索引值，在R文件中，反编译之后，所有的索引值保存在了public.xml文件中，打开查看：
+<?xml version="1.0" encoding="utf-8"?></p>
+<resources>
+    <public type="drawable" name="ic_launcher" id="0x7f020001" />
+    <public type="drawable" name="ic_action_search" id="0x7f020000" />
+    <public type="layout" name="activity_main" id="0x7f030000" />
+    <public type="dimen" name="padding_small" id="0x7f040000" />
+    <public type="dimen" name="padding_medium" id="0x7f040001" />
+    <public type="dimen" name="padding_large" id="0x7f040002" />
+    <public type="string" name="app_name" id="0x7f050000" />
+    <public type="string" name="menu_settings" id="0x7f050001" />
+    <public type="string" name="title_activity_main" id="0x7f050002" />
+    <public type="string" name="info" id="0x7f050003" />
+    <public type="string" name="username" id="0x7f050004" />
+    <public type="string" name="sn" id="0x7f050005" />
+    <public type="string" name="register" id="0x7f050006" />
+    <public type="string" name="hint_username" id="0x7f050007" />
+    <public type="string" name="hint_sn" id="0x7f050008" />
+    <public type="string" name="unregister" id="0x7f050009" />
+    <public type="string" name="registered" id="0x7f05000a" />
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;public type=&quot;string&quot; name=&quot;unsuccessed&quot; id=&quot;0x7f05000b&quot; /&gt;</code></pre></div>
+
+    <public type="string" name="successed" id="0x7f05000c" />
+    <public type="style" name="AppTheme" id="0x7f060000" />
+    <public type="menu" name="activity_main" id="0x7f070000" />
+    <public type="id" name="textView1" id="0x7f080000" />
+    <public type="id" name="edit_username" id="0x7f080001" />
+    <public type="id" name="edit_sn" id="0x7f080002" />
+    <public type="id" name="button_register" id="0x7f080003" />
+    <public type="id" name="menu_settings" id="0x7f080004" />
+</resources>
+<p>Unsuccessed的id的值为0x7f05000b，</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：</code></pre></div>
+
+<p>.line 32
+    #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)Z
+    invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)Z</p>
+
+<pre><code>move-result v0       
+</code></pre>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。</code></pre></div>
+
+<pre><code>.line 33
+if-nez v0, :cond_0     
+</code></pre>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。</code></pre></div>
+
+<pre><code>.line 34
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+</code></pre>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">#这个是对MainActivity实例的引用，代码中的“-&gt;this$0”存储 的是MainActivity的引用</code></pre></div>
+
+<pre><code>.line 35
+const v1, 0x7f05000b   
+</code></pre>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#发现没有？这是unsuccessed字符串！。</code></pre></div>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">#他在这里干了什么？是将V1寄存器传入unsuccessed字符串的id值！</code></pre></div>
+
+<pre><code>.line 34
+invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+</code></pre>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text"># Toast;-&gt;makeText。 这个在Android里是调用提示框的代码，也就是说提示用户“无效的用户名或注册码”。  这样流程就很清楚了。 那注册成功会怎么样呢？我们接着分析。</code></pre></div>
+
+<hr />
+
+<p>:cond_0</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#这里就是上面说到的cond_0，如果跳转到了这里，这段代码的的功能是弹出注册成功提示，也就是说，上面的跳转如果成功意味着程序会成功注册。</code></pre></div>
+
+<pre><code>iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+.line 38
+const v1, 0x7f05000c    
+</code></pre>
+<div class="highlight"><pre><code class="language-text" data-lang="text">#发现没有？这是successed字符串！。</code></pre></div>
+
+<pre><code>.line 37
+invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+
+move-result-object v0
+
+.line 38
+invoke-virtual {v0}, Landroid/widget/Toast;-&gt;show()V
+
+.line 39
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+#getter for: Lcom/droider/crackme0201/MainActivity;-&gt;btn_register:Landroid/widget/Button;
+invoke-static {v0}, Lcom/droider/crackme0201/MainActivity;-&gt;access$3(Lcom/droider/crackme0201/MainActivity;)Landroid/widget/Button;
+
+move-result-object v0
+
+invoke-virtual {v0, v3}, Landroid/widget/Button;-&gt;setEnabled(Z)V
+
+.line 40
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+
+const v1, 0x7f05000a
+
+invoke-virtual {v0, v1}, Lcom/droider/crackme0201/MainActivity;-&gt;setTitle(I)V
+
+goto :goto_0 .end method
+</code></pre>
+
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;!--end ------------------------------------------------------华丽丽的分割线--!&gt;</code></pre></div>
+
+<p>分析：if-nez v0, :cond_0 是程序破解的关键。
+If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等
+其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。
+用任意一款文本编辑器打开（或者直接在ApkIDE里修改）将</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text">if-nez v0, :cond_0改成if-eqz v0, :cond_0</code></pre></div>
+<p>保存后，就算修改完成了。
+最后，进行编译、签名，重新安装APK。看看效果吧！</p>
+
+<p><img src="/images/back5.gif" alt="逆向后运行图" /></p>
+
+      
+      
+      <footer role="contentinfo">
+        <div class="bdsharebuttonbox"><h6>分享到</h6><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a></div>
+<br/>
+<br/>
+<script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":["print","qzone","tsina","weixin","tqq","sqq"],"bdPic":"","bdStyle":"1","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+        <!-- 多说评论框 start -->
+      
+      <div class="ds-thread" data-thread-key="/Android逆向实例" data-title="Android逆向新手小案例" data-url="//Android%E9%80%86%E5%90%91%E5%AE%9E%E4%BE%8B/"></div>
+      <!-- 多说评论框 end -->
+      
+        <p class="byline"><strong>Android逆向新手小案例</strong> 发表于 <time datetime="2015-05-21T00:00:00+08:00">2015-05-21</time> 最后修改于 <time datetime="2015-05-21">2015-05-21</time>.</p>
+      </footer>
+    </div><!-- /.article-wrap -->
+   </article>
+  
+ 
+</div><!-- /#main -->
+
+<div class="footer-wrap">
+  
+  <div class="related-articles">
+  <h4>你可能还喜欢 <small class="pull-right">(<a href="/posts/">查看全部文章</a>)</small></h4>
+    <ul>
+    
+      <li><a href="/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8Android%20Studio/" title="Why Android Studio? 及Tips">Why Android Studio? 及Tips</a></li>
+    
+      <li><a href="/%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%8E%B0%E5%9C%A8%E5%AD%A6Android/" title="如果你现在学Android">如果你现在学Android</a></li>
+    
+      <li><a href="/%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95%E4%BD%A0%E7%9A%84Android%E8%AE%BE%E5%A4%87/" title="无线调试你的Android设备">无线调试你的Android设备</a></li>
+    
+    </ul>
+    <hr />
+  </div><!-- /.related-articles -->
+  
+  <footer>
+    
+
+<span>&copy; 2015 史琪锴. </span>
+
+  </footer>
+</div><!-- /.footer-wrap -->
+
+<script src="/assets/js/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="/assets/js/scripts.min.js"></script>
+
+
+  
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xiaochendev"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+	        
+
+</body>
+</html>
