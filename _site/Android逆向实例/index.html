@@ -168,45 +168,48 @@
   </header>
 <div id="drawer">
 <ul id="markdown-toc">
-  <li><a href="#section" id="markdown-toc-section">二.步骤：</a></li>
+  <li><a href="#section" id="markdown-toc-section">一：源码（含下载）</a></li>
+  <li><a href="#section-1" id="markdown-toc-section-1">二.步骤：</a></li>
 </ul>
 
   </div>
 </section>
 <!-- /#table-of-contents -->
-<p>#流程
-##一.<a href="http://download.csdn.net/detail/xsszsqk/8722759">应用程序源码</a>
+<p>#流程</p>
+
+<h2 id="section">一：源码（含下载）</h2>
+<p><a href="http://download.csdn.net/detail/xsszsqk/8722759">应用程序源码</a>
 可以用Android Studio或者Eclipse。
 关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：
-<code>private boolean checkSN(String userName, String sn) {
+private boolean checkSN(String userName, String sn) {
         try {
             if ((userName == null) || (userName.length() == 0))
                 return false;
             if ((sn == null) || (sn.length() != 16))
                 return false;
-            MessageDigest digest = MessageDigest.getInstance("MD5");
+            MessageDigest digest = MessageDigest.getInstance(“MD5”);
             digest.reset();
             digest.update(userName.getBytes());
             byte[] bytes = digest.digest();     //采用MD5对用户名进行Hash
-            String hexstr = toHexString(bytes, ""); //将计算结果转化成字符串
+            String hexstr = toHexString(bytes, “”); //将计算结果转化成字符串
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i &lt; hexstr.length(); i += 2) {
                 sb.append(hexstr.charAt(i));
             }
-            String userSN = sb.toString(); //计算出的SN        
-            //Log.d("crackme", hexstr);
-            //Log.d("crackme", userSN);
+            String userSN = sb.toString(); //计算出的SN      <br />
+            //Log.d(“crackme”, hexstr);
+            //Log.d(“crackme”, userSN);
             if (!userSN.equalsIgnoreCase(sn))   //比较注册码是否正确
                 return false;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
             return false;
-        }        
+        }      <br />
         return true;
-    }</code>
+    }
 这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
   接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：
-    `btn_register = (Button) findViewById(R.id.button_register);
+    btn_register = (Button) findViewById(R.id.button_register);
         btn_register.setOnClickListener(new OnClickListener() {</p>
 
 <pre><code>        public void onClick(View v) {
@@ -221,12 +224,12 @@
                 setTitle(R.string.registered);  //模拟程序已注册
             }                
         }
-    });`    接下来进行编译，运行(集成工具已经帮我们做好了一切)。 运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：  思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
+    });   接下来进行编译，运行(集成工具已经帮我们做好了一切)。 运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：  思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
 </code></pre>
 
 <p>我们将使用APKIDE。</p>
 
-<h2 id="section">二.步骤：</h2>
+<h2 id="section-1">二.步骤：</h2>
 <p>还记得刚刚的错误提示</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">“无效的用户名或注册码”</code></pre></div>
 <p>，就从这里入手。
@@ -237,25 +240,24 @@
 其中smali目录下存放了程序所有的反汇编代码，res目录则是程序中所有的资源文件，这些目录的子目录与开发时的源码目录组织结构是一致的。
 错误提示是Android程序中的字符串资源，开发Android程序时，这些字符串可能硬编码到源码中，也可能引用自“res-values”目录下的strings.xml文件，
 apk文件在打包时，strings.xml中的字符串被加密存储为resources.arsc文件保存到APK程序包中，apk被成功反编译之后这个文件也被解密出来了。
-我们打开反编译后的<img src="/images/back4.jpg" alt="3" />文件，内容如下：
-<?xml version="1.0" encoding="utf-8"?></p>
-<resources>
-    <string name="app_name">Crackme0201</string>
-    <string name="menu_settings">Settings</string>
-    <string name="title_activity_main">Crackme0201</string>
-    <string name="info">Android程序破解演示实例</string>
-    <string name="username">用户名：</string>
-    <string name="sn">注册码：</string>
-    <string name="register">注 册</string>
-    <string name="hint_username">请输入用户名</string>
-    <string name="hint_sn">请输入16位的注册码</string>
-    <string name="unregister">程序未注册</string>
-    <string name="registered">程序已注册</string>
+我们打开反编译后的<img src="/images/back4.jpg" alt="3" />文件，内容如下：</p>
 
-<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;string name=&quot;unsuccessed&quot;&gt;无效用户名或注册码&lt;/string&gt;</code></pre></div>
-
-    <string name="successed">恭喜您！注册成功</string>
-</resources>
+<div class="highlight"><pre><code class="language-text" data-lang="text">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;resources&gt;
+    &lt;string name=&quot;app_name&quot;&gt;Crackme0201&lt;/string&gt;
+    &lt;string name=&quot;menu_settings&quot;&gt;Settings&lt;/string&gt;
+    &lt;string name=&quot;title_activity_main&quot;&gt;Crackme0201&lt;/string&gt;
+    &lt;string name=&quot;info&quot;&gt;Android程序破解演示实例&lt;/string&gt;
+    &lt;string name=&quot;username&quot;&gt;用户名：&lt;/string&gt;
+    &lt;string name=&quot;sn&quot;&gt;注册码：&lt;/string&gt;
+    &lt;string name=&quot;register&quot;&gt;注 册&lt;/string&gt;
+    &lt;string name=&quot;hint_username&quot;&gt;请输入用户名&lt;/string&gt;
+    &lt;string name=&quot;hint_sn&quot;&gt;请输入16位的注册码&lt;/string&gt;
+    &lt;string name=&quot;unregister&quot;&gt;程序未注册&lt;/string&gt;
+    &lt;string name=&quot;registered&quot;&gt;程序已注册&lt;/string&gt;
+    &lt;string name=&quot;unsuccessed&quot;&gt;无效用户名或注册码&lt;/string&gt;
+    &lt;string name=&quot;successed&quot;&gt;恭喜您！注册成功&lt;/string&gt;
+&lt;/resources&gt;</code></pre></div>
 
 <p>我们找到关键字“unsuccessed”，每个字符串都有一个唯一的int类型索引值，在R文件中，反编译之后，所有的索引值保存在了public.xml文件中，打开查看：
 <?xml version="1.0" encoding="utf-8"?></p>
