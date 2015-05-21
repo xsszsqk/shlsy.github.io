@@ -306,19 +306,13 @@ Unsuccessed的id的值为0x7f05000b，<br /></p>
     .line 32 <br /><br />
     #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)<br /><br />
     invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)<br /><br />
-    move-result v0</p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。</code></pre></div>
-
-<pre><code>&lt;br/&gt;  
-.line 33 &lt;br/&gt;  
-if-nez v0, :cond_0     
-</code></pre>
-<div class="highlight"><pre><code class="language-text" data-lang="text">#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。</code></pre></div>
-
-<pre><code>&lt;br/&gt;  
-.line 34&lt;br/&gt;  
-iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;&lt;br/&gt;  
-</code></pre>
+    move-result v0         #checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。
+    <br /><br />
+    .line 33 <br /><br />
+    if-nez v0, :cond_0     #如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。
+    <br /><br />
+    .line 34<br /><br />
+    iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;<br /></p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">#这个是对MainActivity实例的引用，代码中的“-&gt;this$0”存储 的是MainActivity的引用</code></pre></div>
 <p><br /><br />
@@ -333,13 +327,12 @@ iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/dro
     invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;<br /></p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text"># Toast;-&gt;makeText。 这个在Android里是调用提示框的代码，也就是说提示用户“无效的用户名或注册码”。  这样流程就很清楚了。 那注册成功会怎么样呢？我们接着分析。</code></pre></div>
-<p><br /><br />
-   <strong>**</strong><em>**</em></p>
+<p><br /></p>
 
-<p>:cond_0</p>
+<p>:cond_0   <br /></p>
+
 <div class="highlight"><pre><code class="language-text" data-lang="text">#这里就是上面说到的cond_0，如果跳转到了这里，这段代码的的功能是弹出注册成功提示，也就是说，上面的跳转如果成功意味着程序会成功注册。</code></pre></div>
-<p><br /><br />
-    iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;<br /></p>
+<p><br /></p>
 
 <pre><code>.line 38&lt;br/&gt;  
 const v1, 0x7f05000c    
