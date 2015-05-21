@@ -299,17 +299,18 @@ apk文件在打包时，strings.xml中的字符串被加密存储为resources.ar
     <public type="id" name="button_register" id="0x7f080003" />
     <public type="id" name="menu_settings" id="0x7f080004" />
 </resources>
-<p>Unsuccessed的id的值为0x7f05000b，</p>
+<p><br /><br />
+Unsuccessed的id的值为0x7f05000b，<br /></p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：</code></pre></div>
 <p><br /><br />
-    .line 32
+    .line 32 <br /><br />
     #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)<br /><br />
     invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)<br /><br />
     move-result v0</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。</code></pre></div>
 
 <pre><code>&lt;br/&gt;  
-.line 33
+.line 33 &lt;br/&gt;  
 if-nez v0, :cond_0     
 </code></pre>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。</code></pre></div>
@@ -376,13 +377,13 @@ goto :goto_0&lt;br/&gt;   .end method &lt;br/&gt;
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">&lt;!--end ------------------------------------------------------华丽丽的分割线--!&gt;</code></pre></div>
 
-<p>分析：if-nez v0, :cond_0 是程序破解的关键。
-If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等
-其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。
+<p>分析：if-nez v0, :cond_0 是程序破解的关键。<br /><br />
+If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等<br /><br />
+其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。<br /><br />
 用任意一款文本编辑器打开（或者直接在ApkIDE里修改）将</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">if-nez v0, :cond_0改成if-eqz v0, :cond_0</code></pre></div>
-<p>保存后，就算修改完成了。
-最后，进行编译、签名，重新安装APK。看看效果吧！</p>
+<p>保存后，就算修改完成了。<br /><br />
+最后，进行编译、签名，重新安装APK。看看效果吧！<br /></p>
 
 <p><img src="/images/back5.gif" alt="逆向后运行图" /></p>
 

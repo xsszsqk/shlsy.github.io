@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-05-21T17:26:33+08:00</updated>
+<updated>2015-05-21T17:30:57+08:00</updated>
 <id>/</id>
 <author>
   <name>史琪锴</name>
@@ -165,17 +165,18 @@ apk文件在打包时，strings.xml中的字符串被加密存储为resources.ar
     &lt;public type=&quot;id&quot; name=&quot;button_register&quot; id=&quot;0x7f080003&quot; /&gt;
     &lt;public type=&quot;id&quot; name=&quot;menu_settings&quot; id=&quot;0x7f080004&quot; /&gt;
 &lt;/resources&gt;
-&lt;p&gt;Unsuccessed的id的值为0x7f05000b，&lt;/p&gt;
+&lt;p&gt;&lt;br /&gt;&lt;br /&gt;
+Unsuccessed的id的值为0x7f05000b，&lt;br /&gt;&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;
-    .line 32
+    .line 32 &lt;br /&gt;&lt;br /&gt;
     #calls: Lcom/droider/crackme0201/MainActivity;-&amp;gt;checkSN(Ljava/lang/String;Ljava/lang/String;)&lt;br /&gt;&lt;br /&gt;
     invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&amp;gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)&lt;br /&gt;&lt;br /&gt;
     move-result v0&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;pre&gt;&lt;code&gt;&amp;lt;br/&amp;gt;  
-.line 33
+.line 33 &amp;lt;br/&amp;gt;  
 if-nez v0, :cond_0     
 &lt;/code&gt;&lt;/pre&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -242,13 +243,13 @@ goto :goto_0&amp;lt;br/&amp;gt;   .end method &amp;lt;br/&amp;gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;&amp;lt;!--end ------------------------------------------------------华丽丽的分割线--!&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;分析：if-nez v0, :cond_0 是程序破解的关键。
-If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等
-其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。
+&lt;p&gt;分析：if-nez v0, :cond_0 是程序破解的关键。&lt;br /&gt;&lt;br /&gt;
+If.nez是 Dalvik指令集中的一个条件跳转指令，类似的还有 if-eqz、if-gez，if-lez等&lt;br /&gt;&lt;br /&gt;
+其中if-nez指令功能相反的指令为  if-eqz，表示比较结果为0或相等时进行跳转。&lt;br /&gt;&lt;br /&gt;
 用任意一款文本编辑器打开（或者直接在ApkIDE里修改）将&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;if-nez v0, :cond_0改成if-eqz v0, :cond_0&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;保存后，就算修改完成了。
-最后，进行编译、签名，重新安装APK。看看效果吧！&lt;/p&gt;
+&lt;p&gt;保存后，就算修改完成了。&lt;br /&gt;&lt;br /&gt;
+最后，进行编译、签名，重新安装APK。看看效果吧！&lt;br /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/back5.gif&quot; alt=&quot;逆向后运行图&quot; /&gt;&lt;/p&gt;
 
