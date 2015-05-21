@@ -301,77 +301,77 @@ apk文件在打包时，strings.xml中的字符串被加密存储为resources.ar
 </resources>
 <p>Unsuccessed的id的值为0x7f05000b，</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：</code></pre></div>
-
-<p>.line 32
-    #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)Z
-    invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)Z</p>
-
-<pre><code>move-result v0       
-</code></pre>
+<p><br /><br />
+    .line 32
+    #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)<br /><br />
+    invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)<br /><br />
+    move-result v0</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。</code></pre></div>
 
-<pre><code>.line 33
+<pre><code>&lt;br/&gt;  
+.line 33
 if-nez v0, :cond_0     
 </code></pre>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。</code></pre></div>
 
-<pre><code>.line 34
-iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+<pre><code>&lt;br/&gt;  
+.line 34&lt;br/&gt;  
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;&lt;br/&gt;  
 </code></pre>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">#这个是对MainActivity实例的引用，代码中的“-&gt;this$0”存储 的是MainActivity的引用</code></pre></div>
-
-<pre><code>.line 35
-const v1, 0x7f05000b   
-</code></pre>
+<p><br /><br />
+    .line 35<br /><br />
+    const v1, 0x7f05000b</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#发现没有？这是unsuccessed字符串！。</code></pre></div>
+<p><br /></p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">#他在这里干了什么？是将V1寄存器传入unsuccessed字符串的id值！</code></pre></div>
-
-<pre><code>.line 34
-invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
-</code></pre>
+<p><br /><br />
+    .line 34<br /><br />
+    invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;<br /></p>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text"># Toast;-&gt;makeText。 这个在Android里是调用提示框的代码，也就是说提示用户“无效的用户名或注册码”。  这样流程就很清楚了。 那注册成功会怎么样呢？我们接着分析。</code></pre></div>
-
-<hr />
+<p><br /><br />
+   <strong>**</strong><em>**</em></p>
 
 <p>:cond_0</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#这里就是上面说到的cond_0，如果跳转到了这里，这段代码的的功能是弹出注册成功提示，也就是说，上面的跳转如果成功意味着程序会成功注册。</code></pre></div>
+<p><br /><br />
+    iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;<br /></p>
 
-<pre><code>iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
-
-.line 38
+<pre><code>.line 38&lt;br/&gt;  
 const v1, 0x7f05000c    
 </code></pre>
 <div class="highlight"><pre><code class="language-text" data-lang="text">#发现没有？这是successed字符串！。</code></pre></div>
+<p><br /></p>
 
-<pre><code>.line 37
-invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;
+<pre><code>.line 37&lt;br/&gt;  
+invoke-static {v0, v1, v3}, Landroid/widget/Toast;-&gt;makeText(Landroid/content/Context;II)Landroid/widget/Toast;&lt;br/&gt;  
 
-move-result-object v0
+move-result-object v0&lt;br/&gt;  
 
-.line 38
-invoke-virtual {v0}, Landroid/widget/Toast;-&gt;show()V
+.line 38&lt;br/&gt;  
+invoke-virtual {v0}, Landroid/widget/Toast;-&gt;show()V&lt;br/&gt;  
 
-.line 39
-iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+.line 39&lt;br/&gt;  
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;&lt;br/&gt;  
 
-#getter for: Lcom/droider/crackme0201/MainActivity;-&gt;btn_register:Landroid/widget/Button;
-invoke-static {v0}, Lcom/droider/crackme0201/MainActivity;-&gt;access$3(Lcom/droider/crackme0201/MainActivity;)Landroid/widget/Button;
+#getter for: Lcom/droider/crackme0201/MainActivity;-&gt;btn_register:Landroid/widget/Button;&lt;br/&gt;  
+invoke-static {v0}, Lcom/droider/crackme0201/MainActivity;-&gt;access$3(Lcom/droider/crackme0201/MainActivity;)Landroid/widget/Button;&lt;br/&gt;  
 
-move-result-object v0
+move-result-object v0&lt;br/&gt;  
 
-invoke-virtual {v0, v3}, Landroid/widget/Button;-&gt;setEnabled(Z)V
+invoke-virtual {v0, v3}, Landroid/widget/Button;-&gt;setEnabled(Z)V&lt;br/&gt;  
 
-.line 40
-iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;
+.line 40&lt;br/&gt;  
+iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;&lt;br/&gt;  
 
-const v1, 0x7f05000a
+const v1, 0x7f05000a&lt;br/&gt;  
 
-invoke-virtual {v0, v1}, Lcom/droider/crackme0201/MainActivity;-&gt;setTitle(I)V
+invoke-virtual {v0, v1}, Lcom/droider/crackme0201/MainActivity;-&gt;setTitle(I)V&lt;br/&gt;  
 
-goto :goto_0 .end method
+goto :goto_0&lt;br/&gt;   .end method &lt;br/&gt;  
 </code></pre>
 
 <div class="highlight"><pre><code class="language-text" data-lang="text">&lt;!--end ------------------------------------------------------华丽丽的分割线--!&gt;</code></pre></div>
