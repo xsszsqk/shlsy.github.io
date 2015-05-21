@@ -300,16 +300,17 @@ apk文件在打包时，strings.xml中的字符串被加密存储为resources.ar
     <public type="id" name="menu_settings" id="0x7f080004" />
 </resources>
 <p><br /><br />
-Unsuccessed的id的值为0x7f05000b，<br /></p>
-<div class="highlight"><pre><code class="language-text" data-lang="text">在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：</code></pre></div>
-<p><br /><br />
+Unsuccessed的id的值为0x7f05000b，<br /><br />
+在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：<br /><br />
     .line 32 <br /><br />
     #calls: Lcom/droider/crackme0201/MainActivity;-&gt;checkSN(Ljava/lang/String;Ljava/lang/String;)<br /><br />
     invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)<br /><br />
-    move-result v0         #checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。
+    move-result v0       <br />
+	#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。
     <br /><br />
     .line 33 <br /><br />
-    if-nez v0, :cond_0     #如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。
+    if-nez v0, :cond_0   <br />
+	#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。
     <br /><br />
     .line 34<br /><br />
     iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&gt;this$0:Lcom/droider/crackme0201/MainActivity;<br /></p>
@@ -318,6 +319,7 @@ Unsuccessed的id的值为0x7f05000b，<br /></p>
 <p><br /><br />
     .line 35<br /><br />
     const v1, 0x7f05000b</p>
+
 <div class="highlight"><pre><code class="language-text" data-lang="text">#发现没有？这是unsuccessed字符串！。</code></pre></div>
 <p><br /></p>
 

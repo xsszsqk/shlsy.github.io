@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-05-21T17:34:35+08:00</updated>
+<updated>2015-05-21T17:37:24+08:00</updated>
 <id>/</id>
 <author>
   <name>史琪锴</name>
@@ -166,16 +166,17 @@ apk文件在打包时，strings.xml中的字符串被加密存储为resources.ar
     &lt;public type=&quot;id&quot; name=&quot;menu_settings&quot; id=&quot;0x7f080004&quot; /&gt;
 &lt;/resources&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;
-Unsuccessed的id的值为0x7f05000b，&lt;br /&gt;&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;&lt;br /&gt;&lt;br /&gt;
+Unsuccessed的id的值为0x7f05000b，&lt;br /&gt;&lt;br /&gt;
+在smali目录中搜索含有内容为0x7f05000b的文件，发现只有MainActivity$1.smali文件一处调用，代码如下：&lt;br /&gt;&lt;br /&gt;
     .line 32 &lt;br /&gt;&lt;br /&gt;
     #calls: Lcom/droider/crackme0201/MainActivity;-&amp;gt;checkSN(Ljava/lang/String;Ljava/lang/String;)&lt;br /&gt;&lt;br /&gt;
     invoke-static {v0, v1, v2}, Lcom/droider/crackme0201/MainActivity;-&amp;gt;access$2(Lcom/droider/crackme0201/MainActivity;Ljava/lang/String;Ljava/lang/String;)&lt;br /&gt;&lt;br /&gt;
-    move-result v0         #checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。
+    move-result v0       &lt;br /&gt;
+	#checkSN()函数返回的是Boolean类型的值，这里是将结果保存到V0寄存器中。
     &lt;br /&gt;&lt;br /&gt;
     .line 33 &lt;br /&gt;&lt;br /&gt;
-    if-nez v0, :cond_0     #如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。
+    if-nez v0, :cond_0   &lt;br /&gt;
+	#如果V0中的结果不为0，就跳到 cond_0标号处。反之，程序顺利向下进行。
     &lt;br /&gt;&lt;br /&gt;
     .line 34&lt;br /&gt;&lt;br /&gt;
     iget-object v0, p0, Lcom/droider/crackme0201/MainActivity$1;-&amp;gt;this$0:Lcom/droider/crackme0201/MainActivity;&lt;br /&gt;&lt;/p&gt;
@@ -184,6 +185,7 @@ Unsuccessed的id的值为0x7f05000b，&lt;br /&gt;&lt;/p&gt;
 &lt;p&gt;&lt;br /&gt;&lt;br /&gt;
     .line 35&lt;br /&gt;&lt;br /&gt;
     const v1, 0x7f05000b&lt;/p&gt;
+
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-text&quot; data-lang=&quot;text&quot;&gt;#发现没有？这是unsuccessed字符串！。&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;&lt;br /&gt;&lt;/p&gt;
 
