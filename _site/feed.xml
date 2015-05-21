@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
-<title type="text">晓_晨DEV的博客</title>
+<title type="text">史琪锴的博客</title>
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-05-13T18:47:16+08:00</updated>
+<updated>2015-05-21T11:44:31+08:00</updated>
 <id>/</id>
 <author>
-  <name>晓_晨DEV</name>
+  <name>史琪锴</name>
   <uri>/</uri>
-  <email>cctanfujun@163.com</email>
+  <email>zjnusqk@aliyun.com</email>
 </author>
 
 
@@ -23,9 +23,9 @@
   <published>2015-05-13T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;p&gt;Android Studio作为Google推荐开发Android使用的IDE，今后成为Android开发的主要工具是毋庸置疑的，从Eclipse过度过来的你要如何使用它呢！&lt;/p&gt;
@@ -93,7 +93,7 @@
   &lt;li&gt;你可以使用插件来控制你的编码规范&lt;/li&gt;
 &lt;/ul&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8Android%20Studio/&quot;&gt;Why Android Studio? 及Tips&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on May 13, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%BD%BF%E7%94%A8Android%20Studio/&quot;&gt;Why Android Studio? 及Tips&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on May 13, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -108,9 +108,9 @@
   <published>2015-05-08T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
@@ -380,7 +380,7 @@ Android开源库真的太多了，如果你不是特别闲的话，就去关注�
 有任何意见或建议 欢迎讨论&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;/%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%8E%B0%E5%9C%A8%E5%AD%A6Android/&quot;&gt;如果你现在学Android&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on May 08, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E5%A6%82%E6%9E%9C%E4%BD%A0%E7%8E%B0%E5%9C%A8%E5%AD%A6Android/&quot;&gt;如果你现在学Android&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on May 08, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -395,9 +395,9 @@ Android开源库真的太多了，如果你不是特别闲的话，就去关注�
   <published>2015-05-07T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;p&gt;我的MBP只有两个USB口，连接上鼠标和机械键盘没有接口来插数据线了，反复插拔很麻烦，（之前买了个HUB，由于HUB是3.0接口连接上笔记本上不了网，大家注意如果给MBP买HUB要买2.0接口的，悲剧的送人了）决定研究下无线连接手机进行调试。&lt;/p&gt;
@@ -455,7 +455,7 @@ Android开源库真的太多了，如果你不是特别闲的话，就去关注�
 &lt;p&gt;然后在终端输入&lt;code&gt;adb connect ip&lt;/code&gt;即可（ip软件上有显示）&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;/%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95%E4%BD%A0%E7%9A%84Android%E8%AE%BE%E5%A4%87/&quot;&gt;无线调试你的Android设备&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on May 07, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E6%97%A0%E7%BA%BF%E8%B0%83%E8%AF%95%E4%BD%A0%E7%9A%84Android%E8%AE%BE%E5%A4%87/&quot;&gt;无线调试你的Android设备&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on May 07, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -470,9 +470,9 @@ Android开源库真的太多了，如果你不是特别闲的话，就去关注�
   <published>2015-04-21T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
@@ -555,7 +555,7 @@ shift+command+G               前往某个文件夹
 &lt;p&gt;如果你有什么好技巧、好软件也欢迎你回复给我，另本文不定时更新，谢谢阅读！&lt;/p&gt;
 
 
-    &lt;p&gt;&lt;a href=&quot;/%E5%AF%B9%E4%BA%8E%E5%BC%80%E5%8F%91%E8%80%85%E5%AE%9E%E7%94%A8%E7%9A%84Mac%E6%8A%80%E5%B7%A7/&quot;&gt;Mac使用小技巧&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on April 21, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E5%AF%B9%E4%BA%8E%E5%BC%80%E5%8F%91%E8%80%85%E5%AE%9E%E7%94%A8%E7%9A%84Mac%E6%8A%80%E5%B7%A7/&quot;&gt;Mac使用小技巧&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on April 21, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -570,14 +570,14 @@ shift+command+G               前往某个文件夹
   <published>2015-04-17T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;p&gt;请大家鼓掌欢呼！^ ^&lt;/p&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/&quot;&gt;我的博客&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on April 17, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2/&quot;&gt;我的博客&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on April 17, 2015.&lt;/p&gt;
   </content>
 </entry>
 
@@ -592,9 +592,9 @@ shift+command+G               前往某个文件夹
   <published>2015-01-01T00:00:00+08:00</published>
   
   <author>
-    <name>晓_晨DEV</name>
+    <name>史琪锴</name>
     <uri></uri>
-    <email>cctanfujun@163.com</email>
+    <email>zjnusqk@aliyun.com</email>
   </author>
   <content type="html">
     &lt;section id=&quot;table-of-contents&quot; class=&quot;toc&quot;&gt;
@@ -1038,7 +1038,7 @@ comments: true
   &lt;/ol&gt;
 &lt;/div&gt;
 
-    &lt;p&gt;&lt;a href=&quot;/%E4%BD%BF%E7%94%A8%E6%88%91%E7%9A%84%E6%A8%A1%E7%89%88%E6%95%99%E7%A8%8B/&quot;&gt;30分钟内拥有一个漂亮的博客教程&lt;/a&gt; was originally published by 晓_晨DEV at &lt;a href=&quot;&quot;&gt;晓_晨DEV的博客&lt;/a&gt; on January 01, 2015.&lt;/p&gt;
+    &lt;p&gt;&lt;a href=&quot;/%E4%BD%BF%E7%94%A8%E6%88%91%E7%9A%84%E6%A8%A1%E7%89%88%E6%95%99%E7%A8%8B/&quot;&gt;30分钟内拥有一个漂亮的博客教程&lt;/a&gt; was originally published by 史琪锴 at &lt;a href=&quot;&quot;&gt;史琪锴的博客&lt;/a&gt; on January 01, 2015.&lt;/p&gt;
   </content>
 </entry>
 
