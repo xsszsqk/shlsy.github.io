@@ -179,8 +179,9 @@
 
 <h2 id="section">一：源码（含下载）</h2>
 <p><a href="http://download.csdn.net/detail/xsszsqk/8722759">应用程序源码</a>
+<br /><br />
 可以用Android Studio或者Eclipse。
-关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：
+关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：<br /><br />
 private boolean checkSN(String userName, String sn) {
         try {
             if ((userName == null) || (userName.length() == 0))
@@ -207,7 +208,9 @@ private boolean checkSN(String userName, String sn) {
         }      <br />
         return true;
     }
-这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
+	<br /><br />
+  这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，
+  然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
   接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：
     btn_register = (Button) findViewById(R.id.button_register);
         btn_register.setOnClickListener(new OnClickListener() {</p>
