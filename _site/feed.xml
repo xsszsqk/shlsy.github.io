@@ -4,7 +4,7 @@
 <generator uri="https://github.com/jekyll/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="/feed.xml" />
 <link rel="alternate" type="text/html" href="" />
-<updated>2015-05-21T17:18:12+08:00</updated>
+<updated>2015-05-21T17:20:47+08:00</updated>
 <id>/</id>
 <author>
   <name>史琪锴</name>
@@ -75,27 +75,31 @@ private boolean checkSN(String userName, String sn) {    &lt;br /&gt;&lt;br /&gt
         return true;&lt;br /&gt;&lt;br /&gt;
     }
 	&lt;br /&gt;&lt;br /&gt;
-  这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，
+    这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，
   然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
   接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：&lt;br /&gt;&lt;br /&gt;
     btn_register = (Button) findViewById(R.id.button_register);
-        btn_register.setOnClickListener(new OnClickListener() {&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;        public void onClick(View v) {
-            if (!checkSN(edit_userName.getText().toString().trim(), 
-                    edit_sn.getText().toString().trim())) {
-                Toast.makeText(MainActivity.this,       //弹出无效用户名或注册码提示
-                        R.string.unsuccessed, Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(MainActivity.this,       //弹出注册成功提示
-                        R.string.successed, Toast.LENGTH_SHORT).show();
-                btn_register.setEnabled(false);
-                setTitle(R.string.registered);  //模拟程序已注册
-            }                
-        }
-    });  
-	&amp;lt;br/&amp;gt;   接下来进行编译，运行(集成工具已经帮我们做好了一切)。&amp;lt;br/&amp;gt;   运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：&amp;lt;br/&amp;gt;    思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
-&lt;/code&gt;&lt;/pre&gt;
+        btn_register.setOnClickListener(new OnClickListener() {&lt;br /&gt;&lt;br /&gt;
+            public void onClick(View v) {
+                if (!checkSN(edit_userName.getText().toString().trim(), 
+                        edit_sn.getText().toString().trim())) {
+                    Toast.makeText(MainActivity.this,       //弹出无效用户名或注册码提示
+                            R.string.unsuccessed, Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this,       //弹出注册成功提示
+                            R.string.successed, Toast.LENGTH_SHORT).show();
+                    btn_register.setEnabled(false);
+                    setTitle(R.string.registered);  //模拟程序已注册 &lt;br /&gt;&lt;br /&gt;
+                }              &lt;br /&gt;
+            }
+        });&lt;br /&gt;
+		&lt;br /&gt;&lt;br /&gt;
+接下来进行编译，运行(集成工具已经帮我们做好了一切)。&lt;br /&gt;&lt;br /&gt;
+运行截图：
+&lt;img src=&quot;/images/back1.gif&quot; alt=&quot;逆向运行图&quot; /&gt;
+接下来就是破解：&lt;br /&gt;&lt;br /&gt;
+ 思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，
+ 找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。&lt;/p&gt;
 
 &lt;p&gt;我们将使用APKIDE。&lt;/p&gt;
 
