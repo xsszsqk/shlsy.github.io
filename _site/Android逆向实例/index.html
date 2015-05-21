@@ -182,36 +182,36 @@
 <br /><br />
 可以用Android Studio或者Eclipse。
 关键部分MainAcitivity中编写一个CheckSN()方法，代码如下：<br /><br />
-private boolean checkSN(String userName, String sn) {
-        try {
-            if ((userName == null) || (userName.length() == 0))
-                return false;
-            if ((sn == null) || (sn.length() != 16))
-                return false;
-            MessageDigest digest = MessageDigest.getInstance(“MD5”);
-            digest.reset();
-            digest.update(userName.getBytes());
-            byte[] bytes = digest.digest();     //采用MD5对用户名进行Hash
-            String hexstr = toHexString(bytes, “”); //将计算结果转化成字符串
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i &lt; hexstr.length(); i += 2) {
-                sb.append(hexstr.charAt(i));
-            }
-            String userSN = sb.toString(); //计算出的SN      <br />
-            //Log.d(“crackme”, hexstr);
-            //Log.d(“crackme”, userSN);
-            if (!userSN.equalsIgnoreCase(sn))   //比较注册码是否正确
-                return false;
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-            return false;
-        }      <br />
-        return true;
+private boolean checkSN(String userName, String sn) {    <br /><br />
+        try {        <br /><br />
+            if ((userName == null) || (userName.length() == 0))<br /><br />
+                return false;<br /><br />
+            if ((sn == null) || (sn.length() != 16))<br /><br />
+                return false;<br /><br />
+            MessageDigest digest = MessageDigest.getInstance(“MD5”);<br /><br />
+            digest.reset();<br /><br />
+            digest.update(userName.getBytes());<br /><br />
+            byte[] bytes = digest.digest();     //采用MD5对用户名进行Hash<br /><br />
+            String hexstr = toHexString(bytes, “”); //将计算结果转化成字符串<br /><br />
+            StringBuilder sb = new StringBuilder();<br /><br />
+            for (int i = 0; i &lt; hexstr.length(); i += 2) {<br /><br />
+                sb.append(hexstr.charAt(i));<br /><br />
+            }<br /><br />
+            String userSN = sb.toString(); //计算出的SN   <br />     <br />
+            //Log.d(“crackme”, hexstr);<br /><br />
+            //Log.d(“crackme”, userSN);<br /><br />
+            if (!userSN.equalsIgnoreCase(sn))   //比较注册码是否正确<br /><br />
+                return false;<br /><br />
+        } catch (NoSuchAlgorithmException e) {<br /><br />
+            e.printStackTrace();<br /><br />
+            return false;<br /><br />
+        }        <br /><br />
+        return true;<br /><br />
     }
 	<br /><br />
   这个方法的主要功能是计算用户名与注册码是否匹配，计算的步骤为：使用MD5算法计算用户名字符串的Hash，将计算所得结果转换成长度为32位的十六进制字符串，
   然后取字符串的所有奇数位重新组合生成新的字符串，这个字符串就是最终的注册码，最后将它与传入的注册码进行比较，如果相同表示注册码是正确的，反之注册码是错误的。
-  接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：
+  接着在MainActivity的OnCreate()方法中加入注册按钮点击事件的监听器，如果用户名与注册码匹配就会弹出注册成功的提示，不匹配则提示无效的用户名或注册码。代码如下：<br /><br />
     btn_register = (Button) findViewById(R.id.button_register);
         btn_register.setOnClickListener(new OnClickListener() {</p>
 
@@ -227,7 +227,8 @@ private boolean checkSN(String userName, String sn) {
                 setTitle(R.string.registered);  //模拟程序已注册
             }                
         }
-    });   接下来进行编译，运行(集成工具已经帮我们做好了一切)。 运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：  思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
+    });  
+	&lt;br/&gt;   接下来进行编译，运行(集成工具已经帮我们做好了一切)。&lt;br/&gt;   运行截图： ![逆向运行图](/images/back1.gif) 接下来就是破解：&lt;br/&gt;    思路：通过反编译软件（例如APKIDE,APKTool）等工具反编译APK，生成Smali格式的反汇编代码，然后阅读Smali文件的代码来理解程序的运行机制，  找到程序的突破口进行修改，最后使用反汇编工具重新编译成APK并签名（没有签名的APK是无法运行的）。
 </code></pre>
 
 <p>我们将使用APKIDE。</p>
